@@ -1,0 +1,22 @@
+<header th:fragment="header">
+  <div class="header-bar header-bar__left">
+    <a href="/products">
+      <img th:src="@{/images/sporty-shoes-logo.svg}" alt="">
+    </a>
+  </div>
+  <div class="header-bar header-bar__left">
+    <a class="menu-item" href="/products">
+      <span class="material-icons">list</span>
+      Products
+    </a>
+    <div class="menu-item">
+      <span class="material-icons">shopping_cart</span>
+      Cart
+    </div>
+    <div class="menu-item">
+      <span class="material-icons">exit_to_app</span>
+      Logout
+    </div>
+
+  </div>
+</header>

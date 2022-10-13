@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+
+<head lang="en" th:include="fragments/head :: head">
+   <title id="pageTitle">Sporty Shoes | Login</title>
+</head>
+
+<body>
+<div class="container">
+   <div class="login-container">
+      <div class="logo">
+         <img th:src="@{/images/sporty-shoes-logo.svg}" alt="Sporty Shoes Logo">
+      </div>
+      <div class="login-form">
+         <div class="login-form__title">Login</div>
+         <form th:action="@{/login}" th:object="${loginForm}" method="post">
+            <div class="form-control">
+               <label for="user_email">Email</label>
+               <input id="user_email" type="text" name="user_email">
+            </div>
+            <div class="form-control">
+               <label for="password">Password</label>
+               <input id="password" type="password" name="password">
+            </div>
+            <div class="form-control form-control__error" th:classappend="${isError} ? 'active': ''">
+               <span>Email/Password is incorrect!</span>
+            </div>
+            <div class="form-buttons">
+               <button type="submit">
+                  <span class="material-icons">forward</span>
+                  Login
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
+</body>
+
+</html>

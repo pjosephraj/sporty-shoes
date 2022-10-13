@@ -1,0 +1,133 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head lang="en" th:include="fragments/head :: head">
+   <title id="pageTitle">Sporty Shoes | Product List</title>
+</head>
+<body>
+<header th:replace="fragments/header" :: header></header>
+<main>
+   <div class="main-wrapper">
+      <div th:if="${isAdmin}" class="main-head">
+         <a class="menu-item" href="/products/add">
+            <span class="material-icons">playlist_add</span>
+            Add Product
+         </a>
+      </div>
+      <div class="table-container">
+         <table>
+            <thead>
+            <tr>
+               <th>Name</th>
+               <th>Brand</th>
+               <th>Category</th>
+               <th>Season</th>
+               <th>Color</th>
+               <th>Price</th>
+               <th>Discount</th>
+               <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product: ${products}" th:data-product-id="${product.id}"
+                th:data-product-name="${product.product_name}">
+               <td class="tt-c" th:text="${product.product_name}"></td>
+               <td class="tt-c" th:text="${product.brand}"></td>
+               <td class="tt-c" th:text="${product.category}"></td>
+               <td class="tt-c" th:text="${product.season}"></td>
+               <td class="tt-c" th:text="${product.color}"></td>
+               <td th:text="${product.price}"></td>
+               <td th:text="${product.discount}"></td>
+               <td>
+                  <div class="menu-item menu-item__sm">
+                     <span class="material-icons">add_shopping_cart</span>
+                     Add to Cart
+                  </div>
+                  <div th:if="${isAdmin}" class="menu-item menu-item__sm">
+                     <span class="material-icons">edit</span>
+                     Edit
+                  </div>
+                  <div th:if="${isAdmin}" class="menu-item menu-item__sm btn--delete">
+                     <span class="material-icons">delete</span>
+                     Delete
+                  </div>
+               </td>
+            </tr>
+            <tr th:if="${products.size() == 0}">
+               <td colspan="7" class="ta-center">No Products Added.</td>
+            </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+   <div class="alert-message">
+      <span></span>
+   </div>
+   <div id="confirm-box-wrapper">
+      <div id="confirm-box">
+         <div>Are you sure to delete the product: <span></span> ?</div>
+         <div class="form-buttons">
+            <button id="btn-product-cancel" class="menu-item" type="button">
+               Cancel
+            </button>
+            <button id="btn-product-yes" class="menu-item" type="button">
+               Yes
+            </button>
+         </div>
+      </div>
+   </div>
+   <form style="display: none" th:action="@{/delete-product}" th:object="${productForm}" method="post"
+         id="delete-form">
+      <input id="product-id-input" type="number" name="id">
+   </form>
+
+</main>
+<script th:inline="javascript">
+   var successMessage = [[${message}]];
+   var isSuccess = [[${success}]];
+</script>
+<script>
+   const alertMsgElm = document.querySelector('.alert-message');
+   showAlertMessage(isSuccess, successMessage);
+   const delteBtns = document.querySelectorAll('.btn--delete');
+   const confirmBoxWrapper = document.querySelector('#confirm-box-wrapper');
+   const productCancel = document.querySelector("#btn-product-cancel");
+   const productYes = document.querySelector("#btn-product-yes");
+   const deleteForm = document.querySelector('#delete-form');
+   const productIdInput = document.querySelector('#product-id-input');
+   delteBtns.forEach(elm => {
+      elm.addEventListener('click', (event) => {
+         const tr = event.target.closest('tr');
+         productIdInput.value = +tr.getAttribute('data-product-id');
+         confirmBoxWrapper.classList.add('active');
+      });
+   });
+
+   productCancel.addEventListener('click', () => {
+      productIdInput.value = '';
+      confirmBoxWrapper.classList.remove('active');
+   });
+
+   productYes.addEventListener('click', () => {
+      deleteForm.submit();
+   })
+
+   function showAlertMessage(isSuccessMsg, messageTxt) {
+      if(messageTxt) {
+         alertMsgElm.innerHTML = `<span>${messageTxt}</span>`;
+         if(isSuccessMsg) {
+            alertMsgElm.classList.add('alert-message--success');
+         } else {
+            alertMsgElm.classList.add('alert-message--danger');
+         }
+         setTimeout(() => {
+            alertMsgElm.classList.add('active');
+         }, 200);
+         setTimeout(() => {
+            alertMsgElm.classList.remove('active');
+         }, 5000);
+      }
+   }
+</script>
+</body>
+</html>

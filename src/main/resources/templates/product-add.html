@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head lang="en" th:include="fragments/head :: head">
+   <title id="pageTitle">Sporty Shoes | Add Product</title>
+</head>
+
+<body>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<header th:replace="fragments/header :: header"></header>
+<main>
+   <div class="main-wrapper">
+      <div class="main-head">
+         <div class="main-title">Add Product Detail</div>
+         <a class="menu-item" href="/products">
+            <span class="material-icons">arrow_back</span>
+            Back
+         </a>
+      </div>
+      <div class="product-form">
+         <form th:action="@{/add-product}" th:object="${productForm}" method="post">
+            <div class="product-form-controls">
+               <div class="form-control">
+                  <label for="product_name">Product Name</label>
+                  <input id="product_name" type="text" name="product_name" placeholder="Enter Product Name">
+               </div>
+               <div class="form-control">
+                  <label for="season">Season</label>
+                  <select name="season" id="season">
+                     <option value="">Select Season</option>
+                     <option value="all">All Season</option>
+                     <option value="adidas">Summer</option>
+                     <option value="woodland">Monsoon</option>
+                     <option value="nike">Winter</option>
+                  </select>
+               </div>
+               <div class="form-control">
+                  <label for="brand">Brand</label>
+                  <select name="brand" id="brand">
+                     <option value="">Select Brand</option>
+                     <option value="adidas">Adidas</option>
+                     <option value="woodland">Woodland</option>
+                     <option value="nike">Nike</option>
+                  </select>
+               </div>
+               <div class="form-control">
+                  <label for="category">Category</label>
+                  <select name="category" id="category">
+                     <option value="">Select Category</option>
+                     <option value="men">Men</option>
+                     <option value="women">Women</option>
+                     <option value="kids">Kids</option>
+                  </select>
+               </div>
+               <div class="form-control">
+                  <label for="price">Price</label>
+                  <input id="price" type="number" name="price" placeholder="Enter Product Price">
+               </div>
+               <div class="form-control">
+                  <label for="color">Color</label>
+                  <input id="color" type="text" name="color" placeholder="Enter Product Color">
+               </div>
+               <div class="form-control">
+                  <label for="discount">Discount</label>
+                  <input id="discount" type="number" name="discount" placeholder="Enter Product Discount">
+               </div>
+            </div>
+            <div class="form-buttons">
+               <button type="submit">
+                  <span class="material-icons">playlist_add</span>
+                  Add Product
+               </button>
+            </div>
+         </form>
+      </div>
+   </div>
+</main>
+
+<script>
+   const form = document.querySelector('form');
+   const submitBtn = form.querySelector('button[type="submit"]');
+
+   setSubmitBtnState();
+   form.addEventListener('change', setSubmitBtnState);
+
+   function setSubmitBtnState() {
+      const { product_name, season, brand, category, price, color, discount } = form.elements;
+      const enableBtn = product_name.value && season.value && brand.value && category.value && price.value &&
+         color.value && discount.value;
+      if(enableBtn) {
+         submitBtn.classList.remove('disabled');
+      } else {
+         submitBtn.classList.add('disabled');
+      }
+   }
+</script>
+
+</body>
+
+</html>
