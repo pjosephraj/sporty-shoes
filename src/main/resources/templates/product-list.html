@@ -43,10 +43,10 @@
                      <span class="material-icons">add_shopping_cart</span>
                      Add to Cart
                   </div>
-                  <div th:if="${isAdmin}" class="menu-item menu-item__sm">
+                  <a th:if="${isAdmin}" class="menu-item menu-item__sm" th:href="@{'/products/' + ${product.id}}">
                      <span class="material-icons">edit</span>
                      Edit
-                  </div>
+                  </a>
                   <div th:if="${isAdmin}" class="menu-item menu-item__sm btn--delete">
                      <span class="material-icons">delete</span>
                      Delete
@@ -64,15 +64,18 @@
       <span></span>
    </div>
    <div id="confirm-box-wrapper">
-      <div id="confirm-box">
-         <div>Are you sure to delete the product: <span></span> ?</div>
-         <div class="form-buttons">
-            <button id="btn-product-cancel" class="menu-item" type="button">
-               Cancel
-            </button>
-            <button id="btn-product-yes" class="menu-item" type="button">
-               Yes
-            </button>
+      <div id="confirm-box-container">
+         <div class="confirm-box-title">Confirm Delete</div>
+         <div id="confirm-box">
+            <div>Are you sure to delete the product: <span></span> ?</div>
+            <div class="form-buttons">
+               <button id="btn-product-cancel" class="menu-item" type="button">
+                  Cancel
+               </button>
+               <button id="btn-product-yes" class="menu-item mr-0" type="button">
+                  Yes
+               </button>
+            </div>
          </div>
       </div>
    </div>
@@ -112,10 +115,10 @@
       deleteForm.submit();
    })
 
-   function showAlertMessage(isSuccessMsg, messageTxt) {
-      if(messageTxt) {
+   function showAlertMessage (isSuccessMsg, messageTxt) {
+      if (messageTxt) {
          alertMsgElm.innerHTML = `<span>${messageTxt}</span>`;
-         if(isSuccessMsg) {
+         if (isSuccessMsg) {
             alertMsgElm.classList.add('alert-message--success');
          } else {
             alertMsgElm.classList.add('alert-message--danger');

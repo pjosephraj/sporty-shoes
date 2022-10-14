@@ -22,47 +22,52 @@
             <div class="product-form-controls">
                <div class="form-control">
                   <label for="product_name">Product Name</label>
-                  <input id="product_name" type="text" name="product_name" placeholder="Enter Product Name">
+                  <input id="product_name" type="text" name="product_name" placeholder="Enter Product Name"
+                         th:value="${productId}">
                </div>
                <div class="form-control">
                   <label for="season">Season</label>
                   <select name="season" id="season">
-                     <option value="">Select Season</option>
-                     <option value="all">All Season</option>
-                     <option value="adidas">Summer</option>
-                     <option value="woodland">Monsoon</option>
-                     <option value="nike">Winter</option>
+                     <option>Select Season</option>
+                     <option th:value="'all'" th:text="'All Season'" th:selected="${productSeason=='all'}"></option>
+                     <option th:value="'summer'" th:text="Summer" th:selected="${productSeason=='summer'}"></option>
+                     <option th:value="'monsoon'" th:text="Monsoon" th:selected="${productSeason=='monsoon'}"></option>
+                     <option th:value="'winter'" th:text="Winter" th:selected="${productSeason=='winter'}"></option>
                   </select>
                </div>
                <div class="form-control">
                   <label for="brand">Brand</label>
                   <select name="brand" id="brand">
-                     <option value="">Select Brand</option>
-                     <option value="adidas">Adidas</option>
-                     <option value="woodland">Woodland</option>
-                     <option value="nike">Nike</option>
+                     <option>Select Brand</option>
+                     <option th:value="'adidas'" th:selected="${productBrand=='adidas'}" th:text="Adidas"></option>
+                     <option th:value="'woodland'" th:selected="${productBrand=='woodland'}"
+                             th:text="Woodland"></option>
+                     <option th:value="'nike'" th:selected="${productBrand=='nike'}" th:text="Nike"></option>
                   </select>
                </div>
                <div class="form-control">
                   <label for="category">Category</label>
                   <select name="category" id="category">
-                     <option value="">Select Category</option>
-                     <option value="men">Men</option>
-                     <option value="women">Women</option>
-                     <option value="kids">Kids</option>
+                     <option>Select Category</option>
+                     <option th:value="'men'" th:text="Men" th:selected="${productCategory=='men'}"></option>
+                     <option th:value="'women'" th:text="Women" th:selected="${productCategory=='women'}"></option>
+                     <option th:value="'kids'" th:text="Kids" th:selected="${productCategory=='kids'}"></option>
                   </select>
                </div>
                <div class="form-control">
                   <label for="price">Price</label>
-                  <input id="price" type="number" name="price" placeholder="Enter Product Price">
+                  <input id="price" type="number" name="price" placeholder="Enter Product Price"
+                         th:value="${productPrice}">
                </div>
                <div class="form-control">
                   <label for="color">Color</label>
-                  <input id="color" type="text" name="color" placeholder="Enter Product Color">
+                  <input id="color" type="text" name="color" placeholder="Enter Product Color"
+                         th:value="${productColor}">
                </div>
                <div class="form-control">
                   <label for="discount">Discount</label>
-                  <input id="discount" type="number" name="discount" placeholder="Enter Product Discount">
+                  <input id="discount" type="number" name="discount" placeholder="Enter Product Discount"
+                         th:value="${productDiscount}">
                </div>
             </div>
             <div class="form-buttons">

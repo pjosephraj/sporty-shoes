@@ -300,13 +300,29 @@ tbody tr:hover {
     visibility: visible;
 }
 
+#confirm-box-container {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.confirm-box-title {
+    background: var(--primary-dark);
+    color: #fff;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+}
+
 #confirm-box {
     background: #fff;
-    padding: 1.5rem 2rem;
-    border-radius: 6px;
+    padding: 1rem 1.2rem;
 }
 
 /* Utility */
 .tt-c {
     text-transform: capitalize;
+}
+
+.mr-0 {
+    margin-right: 0;
 }
